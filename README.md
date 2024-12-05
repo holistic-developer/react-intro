@@ -1,4 +1,6 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# React Introduction
+
+This presentation was built using [Slidev](https://github.com/slidevjs/slidev)!
 
 To start the slide show:
 

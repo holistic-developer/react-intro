@@ -1,636 +1,400 @@
 ---
-# You can also start simply with 'default'
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: React Introduction
+titleTemplate: '%s'
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slide
+  ## A short introduction to React
+  This intro tries to convey the basics of React and what it feels like to work with it.
 class: text-center
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
-transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
+transition: fade
 mdc: true
+remoteAssets: true
+monacoRunAdditionalDeps:
+  - react
+  - react-dom
+
 ---
 
-# Welcome to Slidev
+# React <logos-react animate-spin animate-duration-5000/>
 
-Presentation slides for developers
+---
+layout: iframe-right
+url: https://andreas.taranetz.com
+---
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
+# > whoami
+
+[andreas.taranetz.com](https://andreas.taranetz.com)
+
+---
+layout: section
+---
+
+# Single Page Applications (SPAs)
+
+---
+
+## How websites worked in the "past"
+
+<div my-10 text-center>
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Webserver
+    participant D as Database
+    C ->>+ S: GET example.com/
+    S ->>+ D: query  
+    D ->>- S: result
+    S ->>- C: rendered HTML
+```
+<span text-gray text-sm>// render ≠ paint </span>
+
 </div>
 
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+<p text-center v-click>👎 every following interaction causes another roundtrip to the server</p>
 
 ---
-transition: fade-out
----
 
-# What is Slidev?
+## How websites work "today"
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
+<div text-center>
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Webserver
+    C ->>+ S: GET example.com/
+    S ->>- C: empty page + way too much JS
+    activate C
+    Note right of C: render the DOM on the client side
+    deactivate C
+    C -->> C: any interaction
+    activate C
+    Note right of C: update the DOM on the client side
+    deactivate C
 ```
 
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
+<v-clicks>
 
-::right::
+👍 Reacts immediately to interactions
 
-<Toc text-sm minDepth="1" maxDepth="2" />
+👎 Long **initial load time** due to loading and parsing a big JS bundle
+
+</v-clicks>
+
+</div>
+
+---
+
+## How websites *actually* work "today"
+
+<div text-center>
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Webserver
+    participant D as Database
+    C ->>+ S: GET example.com/
+    S ->>- C: empty page + way too much JS
+    activate C
+    Note right of C: start to render
+    C ->>+ S: GET /api/...
+    S ->>+ D: query  
+    D ->>- S: result
+    S ->>- C: json
+    deactivate C
+```
+</div>
+
+<!-- only actual data is sent, not the whole page again -->
+
+---
+
+## How websites *could* work today
+
+<div text-center>
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Webserver
+    C ->> S: GET example.com/
+    S ->> C: pre-rendered page + tiny bit of JS
+    C -->> C: click a button
+    C ->> S: what functionality is behind this button?
+    S ->> C: another tiny bit of JS
+```
+
+ℹ️ this is not how react works, but rather the approach of [qwik](https://qwik.dev/) or [htmx](https://htmx.org/)
+
+<span v-click>👍 Content is also accessible by bots</span>
+</div>
+
+
+---
+layout: section
+---
+
+# Why useReact?
+
+---
+
+# Some props
+
+<v-clicks text-xl>
+
+- 📚 Javascript library for building user interfaces (not only web)
+- ✨ Does **not require** a compiler or build step
+- 🛠️ Developed by Meta <logos-meta bg-white rounded p-0.2/>
+- 🗓️ Released 2013-05-29
+- ✅ Current stable version **18.3**
+- Used by other meta-frameworks: <span text-gray text-sm>// not developed by <logos-meta bg-white rounded p-0.2/></span>
+    - Next <logos-nextjs bg-white rounded p-0.2/>
+    - Remix <logos-remix bg-white rounded p-0.2/>
+    - Gatsby <logos-gatsby />
+
+</v-clicks>
+
+---
+
+<h1>
+<span v-mark="{color: 'red', type: 'strike-through', strokeWidth: 10}">Interest</span>
+<span ml-5 v-after="1" fade-in>Searches necessary to get it to work</span>
+</h1>
+
+[Google trends](https://trends.google.com/trends/explore?q=react,angular)
+
+![](/google-trends.png)
 
 ---
 layout: image-right
-image: https://cover.sli.dev
+image: /developer-survey.png
+backgroundSize: contain
 ---
 
-# Code
+# Popularity
 
-Use code snippets and get the highlighting directly, and even types hover!
+[Stackoverflow developer survey 2024](https://survey.stackoverflow.co/2024/technology#1-web-frameworks-and-technologies)
 
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
+> Which web frameworks and web technologies have you done extensive development work in over the past year, and which do you want to work in over the next year?
 
-import { computed, ref } from 'vue'
+---
+layout: two-cols
+---
 
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
+# Nice
 
-doubled.value = 2
+<v-clicks text-xl>
+
+- $view = f(state)$
+- Composable components
+- Can be used for any kind of UI
+- Big ecosystem
+- Not opinionated
+
+</v-clicks>
+
+::right::
+
+# Meh
+
+<v-clicks text-xl>
+
+- No builtin way to handle data fetching
+- No builtin routing
+- No builtin internationalization features
+- No builtin forms
+- Not opinionated
+
+</v-clicks>
+
+---
+layout: center
+zoom: 1.3
+---
+Can we have DOM manipulation?
+
+No, we have DOM manipulation at home
+
+DOM manipulation at home: <logos-jquery m-1 bg-white rounded/>
+
+---
+
+# Manipulate the DOM without any libaries
+
+```js {monaco-run} {autorun:false}
+const root = document.getElementById('root')
+
+console.log(root.textContent)
+//console.log(root.outerHTML)
 ```
 
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
+<div id="root" class="my-10 border">
+    🚧 Root div under construction 🚧
+</div>
 
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
+<div v-click>
 
-<!-- Footer -->
+```js {monaco-run} {autorun:false}
+const root = document.getElementById('root')
 
-[Learn more](https://sli.dev/features/line-highlighting)
+const span = document.createElement('span')
+span.textContent = ['🙈', '🙊', '🙉'].at(Math.random() * 3)
+span.className = 'bg-red'
 
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+root.append(span)
+```
 
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
+</div>
 ---
 
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+# Let's do this using React
 
 ````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
+```js  
+const root = document.getElementById('root')
+
+const span = document.createElement('span')
+span.textContent = 'Hello World'
+span.className = 'bg-red'
+
+root.append(span)
 ```
 
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
+```js  {1,2|6-8}
+import React from "react"
+import ReactDOM from "react-dom"
+
+const root = document.getElementById('root')
+
+const span = document.createElement('span')
+span.textContent = 'Hello World'
+span.className = 'bg-red'
+
+root.append(span)
 ```
 
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
+```js {6|4}
+import React from "react"
+import ReactDOM from "react-dom"
+
+const root = document.getElementById('root')
+
+const SpanComponent = React.createElement("span", {className: 'bg-red'}, 'Hello World')
+
+root.append(span)
 ```
 
-Non-code blocks are ignored.
+```js {4|8}
+import React from "react"
+import ReactDOM from "react-dom"
 
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
+const appRoot = ReactDOM.createRoot(document.getElementById('root'))
+
+const SpanComponent = React.createElement("span", {className: 'bg-red'}, 'Hello World')
+
+root.append(span)
+```
+
+```js {8|*}
+import React from "react"
+import ReactDOM from "react-dom"
+
+const appRoot = ReactDOM.createRoot(document.getElementById('root'))
+
+const SpanComponent = React.createElement("span", {className: 'bg-red'}, 'Hello World')
+
+appRoot.render(SpanComponent)
 ```
 ````
 
 ---
 
-# Components
+# Demo time
 
-<div grid="~ cols-2 gap-4">
-<div>
+```js {monaco-run} {autorun:false} 
+import React from "react"
+import ReactDOM from "react-dom"
 
-You can use Vue components directly inside your slides.
+const appRoot = ReactDOM.createRoot(document.getElementById('root2'))
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
+const SpanComponent = React.createElement("span", { className: 'bg-red' }, 'Hello World')
 
-```html
-<Counter :count="10" />
+appRoot.render(SpanComponent)
 ```
 
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
+<div id="root2" class="my-10 border">
+    🚧 Root div under construction 🚧
 </div>
-<div>
 
-```html
-<Tweet id="1390115482657726468" />
+---
+
+# Demo time
+
+```js {monaco-run} {autorun:false} 
+import React from "react"
+import ReactDOM from "react-dom"
+
+const appRoot = ReactDOM.createRoot(document.getElementById('root3'))
+
+const SpanComponent = React.createElement("span", { className: 'bg-red' }, 'Hello World')
+const TextBlock = React.createElement("p", { className: 'flex gap-3' }, [SpanComponent, SpanComponent, SpanComponent])
+
+appRoot.render(TextBlock)
 ```
 
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
+<div id="root3" class="my-10 border">
+    🚧 Root div under construction 🚧
 </div>
 
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
 ---
 
-# Clicks Animations
+# What is `React.createElement()` doing?
 
-You can add `v-click` to elements to add a click animation.
+<span/>
 
-<div v-click>
+```type``` React component type: tag name (`div`, `span`, ...) | React component name
 
-This shows up when you click the slide:
+```props``` Object | null
 
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
+```children``` optional list of child nodes
 
 <v-click>
 
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
+```js {monaco-run} 
+import { createElement } from "react"
 
-```html
-<span v-mark.underline.orange>inline markers</span>
+console.log(createElement("span", { className: 'bg-red' }, 'Hello World'))
+
 ```
 
 </v-click>
 
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
-</div>
-
 ---
 
-# Motions
+Triggering
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+- during initial render
+- when state updates occur
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
+Render Phase (done by react):
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
+- create / update the element tree
+- check for differences to the current tree
 
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
+Commit Phase (done by ReactDOM):
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
+- create / update / delete DOM elements
 
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
+Commiting
 
 ---
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
+layout: iframe-right
+url: https://18.react.dev/
 ---
 
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
+https://18.react.dev/
 
 ---
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
+layout: end
 ---
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
-
----
-layout: center
-class: text-center
----
-
-# Learn More
-
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
-
-<PoweredBySlidev mt-10 />
