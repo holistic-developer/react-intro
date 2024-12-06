@@ -28,11 +28,19 @@ url: https://andreas.taranetz.com
 
 [andreas.taranetz.com](https://andreas.taranetz.com)
 
+![QR code containing a link to the slides](/qr-code.png)
+
+<p text-center>👆 Link to this slide deck</p>
+
 ---
 layout: section
 ---
 
-# Single Page Applications (SPAs)
+# Server side rendering (SSR)
+
+<span text-3xl>vs</span>
+
+# Single Page Applications (SPA)
 
 ---
 
@@ -209,6 +217,12 @@ layout: two-cols
 </v-clicks>
 
 ---
+layout: section
+---
+
+# What is our main issue when building web based UIs?
+
+---
 layout: center
 zoom: 1.3
 ---
@@ -280,7 +294,7 @@ import ReactDOM from "react-dom"
 
 const root = document.getElementById('root')
 
-const SpanComponent = React.createElement("span", {className: 'bg-red'}, 'Hello World')
+const SpanComponent = React.createElement('span', {className: 'bg-red'}, 'Hello World')
 
 root.append(span)
 ```
@@ -291,7 +305,7 @@ import ReactDOM from "react-dom"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root'))
 
-const SpanComponent = React.createElement("span", {className: 'bg-red'}, 'Hello World')
+const SpanComponent = React.createElement('span', {className: 'bg-red'}, 'Hello World')
 
 root.append(span)
 ```
@@ -302,13 +316,19 @@ import ReactDOM from "react-dom"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root'))
 
-const SpanComponent = React.createElement("span", {className: 'bg-red'}, 'Hello World')
+const SpanComponent = React.createElement('span', {className: 'bg-red'}, 'Hello World')
 
 appRoot.render(SpanComponent)
 ```
 ````
 
 ---
+
+<style>
+.bg-red {
+ background: red;
+}
+</style>
 
 # Demo time
 
@@ -318,7 +338,7 @@ import ReactDOM from "react-dom"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root2'))
 
-const SpanComponent = React.createElement("span", { className: 'bg-red' }, 'Hello World')
+const SpanComponent = React.createElement('span', { className: 'bg-red' }, 'Hello World')
 
 appRoot.render(SpanComponent)
 ```
@@ -329,7 +349,18 @@ appRoot.render(SpanComponent)
 
 ---
 
-# Demo time
+<style>
+.bg-red{
+ background: red;
+}
+
+.spaced-out {
+    display: flex;
+    justify-content: space-around;
+}
+</style>
+
+# Demo time with composition
 
 ```js {monaco-run} {autorun:false} 
 import React from "react"
@@ -338,7 +369,7 @@ import ReactDOM from "react-dom"
 const appRoot = ReactDOM.createRoot(document.getElementById('root3'))
 
 const SpanComponent = React.createElement("span", { className: 'bg-red' }, 'Hello World')
-const TextBlock = React.createElement("p", { className: 'flex gap-3' }, [SpanComponent, SpanComponent, SpanComponent])
+const TextBlock = React.createElement("p", { className: 'spaced-out' }, [SpanComponent, SpanComponent, SpanComponent])
 
 appRoot.render(TextBlock)
 ```
@@ -351,13 +382,13 @@ appRoot.render(TextBlock)
 
 # What is `React.createElement()` doing?
 
-<span/>
+Inputs:
 
-```type``` React component type: tag name (`div`, `span`, ...) | React component name
+`type` React component type: tag name (`div`, `span`, ...) | React component name
 
-```props``` Object | null
+`props` Object | null
 
-```children``` optional list of child nodes
+`children` optional list of child nodes
 
 <v-click>
 
@@ -365,35 +396,75 @@ appRoot.render(TextBlock)
 import { createElement } from "react"
 
 console.log(createElement("span", { className: 'bg-red' }, 'Hello World'))
-
 ```
 
 </v-click>
 
 ---
+layout: two-cols
+---
 
-Triggering
+# How pixels are made
 
-- during initial render
-- when state updates occur
+1. Virtual dome is recalculated
 
-Render Phase (done by react):
+    - during initial render
+    - when state updates occur
 
-- create / update the element tree
-- check for differences to the current tree
+2. Render Phase (done by React):
 
-Commit Phase (done by ReactDOM):
+    - create / update the element tree
+    - check for differences to the current tree
 
-- create / update / delete DOM elements
+3. Commit Phase (done by ReactDOM):
 
-Commiting
+    - create / update / delete DOM elements
+    - only those that actually need to change
+
+4. Painting the document (done by the browser)
+
+<small>see also: [react.dev/learn/render-and-commit](https://react.dev/learn/render-and-commit)</small>
+
+::right::
+
+<div ml-10 flex flex-col gap-3>
+<img width="150" alt="" src="https://react.dev/images/docs/illustrations/i_render-and-commit1.png">
+<img width="150" alt="" src="https://react.dev/images/docs/illustrations/i_render-and-commit2.png">
+<img width="150" alt="" src="https://react.dev/images/docs/illustrations/i_render-and-commit3.png" title="Commit phase"/>
+</div>
 
 ---
 layout: iframe-right
 url: https://18.react.dev/
 ---
 
+# How to get started
+
 https://18.react.dev/
+
+Start a new project using react with typescript:
+
+```bash
+npm create vite@latest -- --template=react-ts
+```
+
+choose a name, e.g.: `playground`
+
+```bash
+cd playground # switch into the new folder
+npm install   # install all dependencies
+npm run dev   # run the development server
+```
+
+The output should look something like this:
+
+```bash
+ VITE v6.0.3  ready in 594 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
 
 ---
 layout: end
