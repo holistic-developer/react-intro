@@ -380,6 +380,85 @@ appRoot.render(TextBlock)
 
 ---
 
+# A better way to write react components <span v-click="1">with JSX</span>
+
+We usually put each component in a separate file named after the component
+
+````md magic-move {lines: true}
+```js
+function HelloWorld() {
+  return React.createElement(
+    'div',
+    { id: 'boring-example' },
+    'Hello World'
+  )
+}
+```
+
+```js
+function HelloWorld() {
+  return (
+    <div id='boring-example'>
+      Hello World
+    </div>
+  )
+}
+```
+````
+
+<p v-click mt-10>
+
+⚠️ A build step is required to transform **JSX** into regular **JS** code using `createElement` calls
+
+</p>
+
+---
+layout: two-cols
+lineNumbers: true
+---
+
+# Function Component
+
+the modern way
+
+<div mr-10>
+```js
+function MyComponent() {
+  return (
+    <div>
+      <h1>Willkommen</h1>
+      <div id="hello-world">Hallo WEA</div>
+    </div>
+  );
+} 
+```
+</div>
+
+introduced in React version 16
+
+::right::
+
+# Class Component
+
+the old way
+
+```js
+class MyComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Willkommen</h1>
+        <div id="hello-world">Hallo WEA</div>
+      </div>
+    );
+  }
+} 
+```
+
+`render` is just one of many functions a component could override
+
+---
+
 # What is `React.createElement()` doing?
 
 Inputs:
