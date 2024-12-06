@@ -412,11 +412,11 @@ function HelloWorld() {
 ```
 ````
 
-<p v-click mt-10>
+<div v-click mt-10>
 
 ⚠️ A build step is required to transform **JSX** into regular **JS** code using `createElement` calls
 
-</p>
+</div>
 
 ---
 layout: two-cols
@@ -517,6 +517,42 @@ layout: two-cols
 <img width="150" alt="" src="https://react.dev/images/docs/illustrations/i_render-and-commit2.png">
 <img width="150" alt="" src="https://react.dev/images/docs/illustrations/i_render-and-commit3.png" title="Commit phase"/>
 </div>
+
+---
+
+# More on JSX / TSX
+
+A typical component
+
+```tsx
+import type { ReactNode } from 'react';
+
+type PageHeaderProps = {
+  title: string;
+};
+
+export const PageHeader = ({ title }: PageHeaderProps) => (
+  <div>
+    <Logo />
+    <nav>
+      <h2>You are on page: {title}</h2>
+    </nav>
+  </div>
+);
+
+// within another component
+...
+<PageHeader title={"Home"} />
+...
+```
+
+---
+
+# Allowed within JSX / TSX
+
+any expression
+
+![Expressions](/expressions.png)
 
 ---
 layout: iframe-right
