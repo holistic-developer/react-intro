@@ -233,6 +233,7 @@ No, we have DOM manipulation at home
 DOM manipulation at home: <logos-jquery m-1 bg-white rounded/>
 
 ---
+
 <style>
 .bg-red{
  background: red;
