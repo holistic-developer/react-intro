@@ -233,6 +233,11 @@ No, we have DOM manipulation at home
 DOM manipulation at home: <logos-jquery m-1 bg-white rounded/>
 
 ---
+<style>
+.bg-red{
+ background: red;
+}
+</style>
 
 # Manipulate the DOM without any libaries
 
@@ -426,8 +431,8 @@ the modern way
 function MyComponent() {
   return (
     <div>
-      <h1>Willkommen</h1>
-      <div id="hello-world">Hallo WEA</div>
+      <h1>This is the new way</h1>
+      <p>Much recommended</p>
     </div>
   );
 } 
@@ -447,8 +452,8 @@ class MyComponent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Willkommen</h1>
-        <div id="hello-world">Hallo WEA</div>
+        <h1>This is the old way</h1>
+        <p>You might see this in older docs</p>
       </div>
     );
   }
