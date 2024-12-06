@@ -491,7 +491,7 @@ layout: two-cols
 
 # How pixels are made
 
-1. Virtual dome is recalculated
+1. Virtual DOM is recalculated
 
     - during initial render
     - when state updates occur
@@ -525,20 +525,20 @@ layout: two-cols
 A typical component
 
 ```tsx
-import type { ReactNode } from 'react';
-
 type PageHeaderProps = {
   title: string;
 };
 
-export const PageHeader = ({ title }: PageHeaderProps) => (
-  <div>
-    <Logo />
-    <nav>
-      <h2>You are on page: {title}</h2>
-    </nav>
-  </div>
-);
+export const PageHeader = ({ title }: PageHeaderProps) => {
+  return (
+    <div>
+      <Logo />
+      <nav>
+        <h2>You are on page: {title}</h2>
+      </nav>
+    </div>
+  );
+}
 
 // within another component
 ...
