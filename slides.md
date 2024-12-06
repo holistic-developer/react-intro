@@ -46,7 +46,7 @@ layout: section
 
 <span text-3xl>vs</span>
 
-# Single Page Applications (SPA)
+# Client side rendering (CSR)
 
 ---
 
