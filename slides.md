@@ -19,6 +19,12 @@ monacoRunAdditionalDeps:
 
 # React <logos-react animate-spin animate-duration-5000/>
 
+<div class="abs-br m-6 text-2xl">
+  <button @click="$slidev.nav.next" title="Next slide" class="slidev-icon-btn">
+    <carbon:arrow-right />
+  </button>
+</div>
+
 ---
 layout: iframe-right
 url: https://andreas.taranetz.com
@@ -414,40 +420,19 @@ function HelloWorld() {
 
 <div v-click mt-10>
 
-⚠️ A build step is required to transform **JSX** into regular **JS** code using `createElement` calls
+⚠️ A build step is required to transform **JSX** into regular **JS** code which will use `createElement` calls
 
 </div>
 
 ---
 layout: two-cols
-lineNumbers: true
 ---
-
-# Function Component
-
-the modern way
-
-<div mr-10>
-```js
-function MyComponent() {
-  return (
-    <div>
-      <h1>This is the new way</h1>
-      <p>Much recommended</p>
-    </div>
-  );
-} 
-```
-</div>
-
-introduced in React version 16
-
-::right::
 
 # Class Component
 
 the old way
 
+<div mr-10>
 ```js
 class MyComponent extends React.Component {
   render() {
@@ -460,8 +445,28 @@ class MyComponent extends React.Component {
   }
 } 
 ```
+</div>
 
 `render` is just one of many functions a component could override
+
+::right::
+
+# Function Component
+
+the modern way
+
+```js
+function MyComponent() {
+  return (
+    <div>
+      <h1>This is the new way</h1>
+      <p>Much recommended</p>
+    </div>
+  );
+} 
+```
+
+introduced in React version 16
 
 ---
 
@@ -469,9 +474,9 @@ class MyComponent extends React.Component {
 
 Inputs:
 
-`type` React component type: tag name (`div`, `span`, ...) | React component name
+`type` React component type: tag name (`div`, `span`, ...) or other React component names
 
-`props` Object | null
+`props` Object or null
 
 `children` optional list of child nodes
 
@@ -525,39 +530,61 @@ layout: two-cols
 A typical component
 
 ```tsx
+import Logo from "./Logo";
+
 type PageHeaderProps = {
   title: string;
-};
+}
 
-export const PageHeader = ({ title }: PageHeaderProps) => {
+function PageHeader(props: PageHeaderProps) {
   return (
     <div>
       <Logo />
-      <nav>
-        <h2>You are on page: {title}</h2>
-      </nav>
+      <h2>You are on page: {props.title}</h2>
     </div>
   );
 }
 
+export default PageHeader;
+
 // within another component
 ...
-<PageHeader title={"Home"} />
+<PageHeader title={"Home"} />;
 ...
 ```
 
 ---
+layout: two-cols
+---
 
-# Allowed within JSX / TSX
+# Allowed in JSX / TSX
 
-any expression
+<span/>
 
 ![Expressions](/expressions.png)
+
+::right::
+
+<div mt-14 ml-5>
+
+Other React components
+
+Built in components like HTML elements
+
+Expressions within `{}` e.g.
+
+`<h1>{"Hi" + props.name}<h1>`
+
+Expressions can also return React components as their result, e.g.:
+
+`{guests.map((g) => <Greet name={g.name}/>}`
+</div>
 
 ---
 layout: iframe-right
 url: https://18.react.dev/
 ---
+r
 
 # How to get started
 
