@@ -584,7 +584,6 @@ Expressions can also return React components as their result, e.g.:
 layout: iframe-right
 url: https://18.react.dev/
 ---
-r
 
 # How to get started
 
