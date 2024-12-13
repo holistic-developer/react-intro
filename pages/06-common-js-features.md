@@ -172,7 +172,7 @@ return (
 
 # Using return values of logical expressions ⏎
 
-(condition && value)
+condition && value
 
 ```js {monaco-run} {autorun:false}
 console.log(true && false)
@@ -196,7 +196,7 @@ return (
 
 ```jsx
 return (
-  <h2>{(isFavorite && <StarIcon />)}{title}</h2>
+  <h2>{isFavorite && <StarIcon />}{title}</h2>
 );
 ```
 ````
@@ -279,7 +279,7 @@ console.log(updatedScore);
 Built in method to fetch resources
 
 ```js {monaco-run} {autorun:false}
-const request = fetch("https://jsonplaceholder.typicode.com/todos/1");
+const request = fetch("https://jsonplaceholder.typicode.com/posts/1");
 const result = await request.then(response => response.json());
 
 console.log(result);

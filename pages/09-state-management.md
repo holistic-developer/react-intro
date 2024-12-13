@@ -81,7 +81,7 @@ export const NewPost = () => {
     
     const [content, setContent] = useState("")
     
-    const tooLong = content.length > 50;
+    const tooLong = content.length > 50
     
     return (
       <CardLayout>
@@ -100,7 +100,7 @@ export const NewPost = () => {
     
     const [content, setContent] = useState("")
     
-    const tooLong = content.length > 50;
+    const tooLong = content.length > 50
     
     return (
       <CardLayout>
@@ -120,7 +120,7 @@ export const NewPost = () => {
     
     const [content, setContent] = useState("")
     
-    const tooLong = content.length > 50;
+    const tooLong = content.length > 50
     
     const sendPost = () => {
         // network call using current value of content
@@ -138,6 +138,8 @@ export const NewPost = () => {
 }
 ```
 ````
+
+<small abs-br m-6>see also [useState 🪝](https://react.dev/reference/react/useState)</small>
 
 ---
 
