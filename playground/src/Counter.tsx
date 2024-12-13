@@ -4,6 +4,7 @@ export const Counter = () => {
   const [count, setCount] = useState(0);
 
   const countUp = () => {
+    // this is not how it should be done
     setCount(count + 1);
   };
 

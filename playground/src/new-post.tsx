@@ -7,7 +7,6 @@ export const NewPost = () => {
 
   const sendPost = () => alert(content)
 
-
   console.log("rendering, content: " + content);
 
   return (
