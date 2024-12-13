@@ -2,6 +2,8 @@
 
 This presentation was built using [Slidev](https://github.com/slidevjs/slidev)!
 
+See [the playground containing example react code](./playground/README.md).
+
 To start the slide show:
 
 - `pnpm install`
