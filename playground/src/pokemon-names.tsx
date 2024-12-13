@@ -8,7 +8,7 @@ export const PokemonNames = () => {
     setTimeout(() => {
       // only here to simulate loading
       fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
-        .then((response) => response.json())
+        .then((response) => response.ok && response.json())
         .then((data) => setPokemonData(data))
         .catch(() => setIsError(true));
     }, 1000);

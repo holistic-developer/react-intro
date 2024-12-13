@@ -10,7 +10,7 @@ export const ToggleTimer = () => {
       
       {isTimerVisible && <Timer />}
       
-      <button onClick={() => toggleTimer()}>Toggle Timer</button>
+      <button onClick={toggleTimer}>Toggle Timer</button>
     </div>
   );
 };

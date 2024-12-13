@@ -20,7 +20,7 @@ export const NewPost = () => {
         placeholder="What are you thinking about?"
       />
       {tooLong && <span>Too many characters</span>}
-      <button disabled={tooLong} onClick={() => sendPost()}>Send</button>
+      <button disabled={tooLong} onClick={sendPost}>Send</button>
     </div>
   );
 };

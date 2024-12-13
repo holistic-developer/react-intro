@@ -61,7 +61,7 @@ export const PokemonNames = () => {
       .then(response => response.json())
       .then(data => setPokemonData(data))
       .catch(() => setIsError(true));
-  }, [setPokemonData]);
+  }, [setPokemonData, setIsError]);
 
   if (isError) {
     return <span>Could not fetch them all 😭</span>;
