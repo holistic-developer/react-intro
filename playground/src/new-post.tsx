@@ -3,7 +3,7 @@ import { useState } from "react";
 export const NewPost = () => {
   const [content, setContent] = useState("");
 
-  const tooLong = content.length > 50;
+  const tooLong = content.length > 30;
 
   const sendPost = () => alert(content)
 
@@ -14,7 +14,7 @@ export const NewPost = () => {
       <input
         type="text"
         maxLength={200}
-        size={50}
+        size={30}
         value={content}
         onChange={(event) => setContent(event.target.value)}
         placeholder="What are you thinking about?"

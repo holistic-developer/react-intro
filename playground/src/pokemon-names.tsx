@@ -11,7 +11,7 @@ export const PokemonNames = () => {
         .then((response) => response.json())
         .then((data) => setPokemonData(data))
         .catch(() => setIsError(true));
-    }, 500);
+    }, 1000);
   }, [setPokemonData]);
 
   if (isError) {
