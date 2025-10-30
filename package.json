@@ -13,13 +13,13 @@
 		"@slidev/theme-default": "latest",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"vue": "^3.5.13"
+		"vue": "^3.5.22"
 	},
 	"packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b",
 	"devDependencies": {
-		"@types/react": "^19.1.0",
-		"@types/react-dom": "^19.1.1",
-		"prettier": "^3.5.3",
+		"@types/react": "^19.2.2",
+		"@types/react-dom": "^19.2.2",
+		"prettier": "^3.6.2",
 		"prettier-plugin-slidev": "^1.0.5"
 	}
 }
