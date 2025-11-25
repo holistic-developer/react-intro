@@ -1,11 +1,11 @@
 ---
 layout: iframe-right
-url: https://18.react.dev/
+url: https://19.react.dev/
 ---
 
 # How to get started
 
-https://18.react.dev/
+https://19.react.dev/
 
 Start a new project using react with typescript:
 

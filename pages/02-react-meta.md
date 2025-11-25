@@ -14,7 +14,7 @@ layout: section
 - ✨ Does **not require** a compiler or build step
 - 🛠️ Developed by Meta <logos-meta bg-white rounded p-0.2/>
 - 🗓️ Released 2013-05-29
-- ✅ Current stable version **18.3**
+- ✅ Current stable version **19.2**
 - Used by other meta-frameworks: <span text-gray text-sm>// not developed by <logos-meta bg-white rounded p-0.2/></span>
     - Next <logos-nextjs bg-white rounded p-0.2/>
     - Remix <logos-remix bg-white rounded p-0.2/>

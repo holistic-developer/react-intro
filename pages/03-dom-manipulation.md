@@ -123,7 +123,7 @@ appRoot.render(SpanComponent)
 
 ```js {monaco-run} {autorun:false} 
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root2'))
 
@@ -153,7 +153,7 @@ appRoot.render(SpanComponent)
 
 ```js {monaco-run} {autorun:false} 
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root3'))
 

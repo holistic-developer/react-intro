@@ -15,9 +15,7 @@ layout: iframe-right
 url: https://andreas.taranetz.com
 ---
 
-# > whoami
-
-[andreas.taranetz.com](https://andreas.taranetz.com)
+## Slides
 
 ![QR code containing a link to the slides](/qr-code.png)
 
