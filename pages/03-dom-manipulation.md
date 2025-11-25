@@ -66,7 +66,7 @@ root.append(span)
 
 ```js  {1,2|6-8}
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 
 const root = document.getElementById('root')
 
@@ -79,7 +79,7 @@ root.append(span)
 
 ```js {6|4}
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 
 const root = document.getElementById('root')
 
@@ -90,7 +90,7 @@ root.append(span)
 
 ```js {4|8}
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root'))
 
@@ -101,7 +101,7 @@ root.append(span)
 
 ```js {8|*}
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 
 const appRoot = ReactDOM.createRoot(document.getElementById('root'))
 
