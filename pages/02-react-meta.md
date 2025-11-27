@@ -41,7 +41,7 @@ backgroundSize: contain
 
 # Popularity
 
-[Stackoverflow developer survey 2024](https://survey.stackoverflow.co/2024/technology#1-web-frameworks-and-technologies)
+[Stackoverflow developer survey 2025](https://survey.stackoverflow.co/2025/technology#1-web-frameworks-and-technologies)
 
 > Which web frameworks and web technologies have you done extensive development work in over the past year, and which do you want to work in over the next year?
 
